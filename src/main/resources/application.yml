@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/zipple
+    username: root
+    password: dongcci
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+  oauth:
+    kakao:
+      client-id: a1c16483605d18b151534260ee7b3d0d
+      url:
+        auth: https://kauth.kakao.com
+        api: https://kapi.kakao.com
+
+jwt:
+  secret: GaXmsBiD6L1Z2M3NorAExZp8gr3uPXDR6J6iZxe4pfYKTf0SV1+I0xGqmuPG+nmLVCl9/2+lYB/VFI+AgoFGpg==
+
+logging:
+  level:
+    root: info
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    display-request-duration: true
