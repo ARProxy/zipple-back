@@ -1,7 +1,7 @@
-package com.zipple.module.member.entity;
+package com.zipple.module.member.common.entity;
 
-import com.zipple.module.member.entity.category.AgentType;
-import com.zipple.module.member.entity.category.AgentSpecialty;
+import com.zipple.module.member.common.entity.category.AgentType;
+import com.zipple.module.member.common.entity.category.AgentSpecialty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,7 +49,7 @@ public class AgentUser {
     private String ownerContactNumber;
 
     @Column(name = "single_household_expert_request")
-    private Boolean singleHouseholdExpertRequest;
+    private String singleHouseholdExpertRequest;
 
     @Column(name = "agent_office_registration_certificate")
     private String agentOfficeRegistrationCertificate;

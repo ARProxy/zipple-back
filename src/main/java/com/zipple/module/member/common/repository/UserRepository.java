@@ -1,6 +1,6 @@
-package com.zipple.module.member.repository;
+package com.zipple.module.member.common.repository;
 
-import com.zipple.module.member.entity.User;
+import com.zipple.module.member.common.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

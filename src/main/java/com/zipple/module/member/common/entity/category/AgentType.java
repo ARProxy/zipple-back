@@ -1,4 +1,4 @@
-package com.zipple.module.member.entity.category;
+package com.zipple.module.member.common.entity.category;
 
 import lombok.Getter;
 

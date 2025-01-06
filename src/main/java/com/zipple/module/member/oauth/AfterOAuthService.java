@@ -1,15 +1,15 @@
-package com.zipple.module.member;
+package com.zipple.module.member.oauth;
 
 import com.zipple.common.utils.GetMember;
-import com.zipple.module.member.entity.AgentUser;
-import com.zipple.module.member.entity.GeneralUser;
-import com.zipple.module.member.entity.User;
-import com.zipple.module.member.entity.category.AgentType;
-import com.zipple.module.member.entity.category.HousingType;
-import com.zipple.module.member.model.AgentUserRequest;
-import com.zipple.module.member.model.GeneralUserRequest;
-import com.zipple.module.member.repository.AgentUserRepository;
-import com.zipple.module.member.repository.GeneralUserRepository;
+import com.zipple.module.member.common.entity.AgentUser;
+import com.zipple.module.member.common.entity.GeneralUser;
+import com.zipple.module.member.common.entity.User;
+import com.zipple.module.member.common.entity.category.AgentType;
+import com.zipple.module.member.common.entity.category.HousingType;
+import com.zipple.module.member.oauth.model.AgentUserRequest;
+import com.zipple.module.member.oauth.model.GeneralUserRequest;
+import com.zipple.module.member.common.repository.AgentUserRepository;
+import com.zipple.module.member.common.repository.GeneralUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class StandaloneService {
+public class AfterOAuthService {
 
     private final GeneralUserRepository generalUserRepository;
     private final AgentUserRepository agentUserRepository;
@@ -40,7 +40,7 @@ public class StandaloneService {
                 .user(user())
                 .generalName(generalUserRequest.getGeneralName())
                 .generalAddress(generalUserRequest.getGeneralAddress())
-                .HousingType(HousingType.fromValue(generalUserRequest.getHousingType()))
+                .housingType(HousingType.fromValue(generalUserRequest.getHousingType()))
                 .mandatoryTerms("Y")
                 .optionalTerms(generalUserRequest.getMarketingNotificationTerms())
                 .build();
@@ -57,6 +57,7 @@ public class StandaloneService {
                 .officeAddress(agentUserRequest.getOfficeAddress())
                 .ownerName(agentUserRequest.getOwnerName())
                 .ownerContactNumber(agentUserRequest.getOwnerContactNumber())
+                .singleHouseholdExpertRequest(agentUserRequest.getSingleHouseholdExpertRequest())
                 .agentOfficeRegistrationCertificate(documentsPath(agentCertificationDocuments, 0))
                 .businessRegistrationCertification(documentsPath(agentCertificationDocuments, 1))
                 .agentLicense(documentsPath(agentCertificationDocuments, 2))

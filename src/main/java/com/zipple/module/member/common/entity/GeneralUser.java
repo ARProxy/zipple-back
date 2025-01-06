@@ -1,5 +1,6 @@
-package com.zipple.module.member.entity;
+package com.zipple.module.member.common.entity;
 
+import com.zipple.module.member.common.entity.category.HousingType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +30,8 @@ public class GeneralUser {
     private String generalAddress;
 
     @Enumerated(EnumType.STRING)
-    private com.zipple.module.member.entity.category.HousingType HousingType;
+    @Column(name = "housing_type")
+    private HousingType housingType;
 
     @Column(name = "mandatory_terms")
     private String mandatoryTerms;

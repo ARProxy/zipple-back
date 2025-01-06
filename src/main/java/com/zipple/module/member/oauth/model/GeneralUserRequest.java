@@ -1,10 +1,10 @@
-package com.zipple.module.member.model;
+package com.zipple.module.member.oauth.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(description = "일반 사용자 요청 데이터")
+@Schema(description = "OAuth 로그인 후 추가 일반 사용자 요청 데이터")
 public class GeneralUserRequest {
 
     @Schema(description = "사용자 이름", example = "이지혜")

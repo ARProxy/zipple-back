@@ -1,4 +1,4 @@
-package com.zipple.module.member.entity;
+package com.zipple.module.member.common.entity;
 
 import com.zipple.common.oauth.OAuthProvider;
 import jakarta.persistence.*;

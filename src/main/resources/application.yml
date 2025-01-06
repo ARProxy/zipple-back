@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/zipple
+    url: jdbc:mariadb://localhost:3300/zipple
     username: root
-    password: dongcci
+    password: cubox2023!
 
   jpa:
     properties:
@@ -21,6 +21,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 100MB
+      location: /tmp/upload
 
   oauth:
     kakao:

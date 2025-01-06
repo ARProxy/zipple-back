@@ -1,4 +1,4 @@
-package com.zipple.module.member.model;
+package com.zipple.module.member.oauth.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,9 +15,11 @@ public class AgentUserRequest {
     private String agentSpecialty;
 
     @Schema(description = "이메일", example = "kakao@kakao.com")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String email;
 
     @Schema(description = "비밀번호")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String password;
 
     @Schema(description = "상호명")

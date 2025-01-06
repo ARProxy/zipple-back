@@ -1,4 +1,4 @@
-package com.zipple.module.member.entity.category;
+package com.zipple.module.member.common.entity.category;
 
 import lombok.Getter;
 
@@ -22,8 +22,13 @@ public enum HousingType {
     }
 
     public static HousingType fromValue(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("Housing Type cannot be null or empty");
+        }
+
+        String normalizedValue = value.trim();
         for (HousingType type : HousingType.values()) {
-            if (type.getHousingType().equalsIgnoreCase(value)) {
+            if (type.getHousingType().equalsIgnoreCase(normalizedValue)) {
                 return type;
             }
         }

@@ -1,7 +1,7 @@
 package com.zipple.common.auth.jwt;
 
-import com.zipple.module.member.entity.User;
-import com.zipple.module.member.repository.UserRepository;
+import com.zipple.module.member.common.entity.User;
+import com.zipple.module.member.common.repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

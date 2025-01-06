@@ -1,7 +1,7 @@
 package com.zipple.common.utils;
 
-import com.zipple.module.member.entity.User;
-import com.zipple.module.member.repository.UserRepository;
+import com.zipple.module.member.common.entity.User;
+import com.zipple.module.member.common.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

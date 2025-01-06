@@ -1,11 +1,9 @@
-package com.zipple.module.member;
+package com.zipple.module.member.oauth;
 
-import com.zipple.module.member.model.AgentUserRequest;
-import com.zipple.module.member.model.GeneralUserRequest;
+import com.zipple.module.member.oauth.model.AgentUserRequest;
+import com.zipple.module.member.oauth.model.GeneralUserRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Tag(name = "이메일 회원가입")
+@Tag(name = "카카오 로그인 후 추가 정보 API")
 @RestController
 @RequestMapping("/api/v1/register")
 @RequiredArgsConstructor
-public class StandaloneController {
+public class AfterOAuthController {
 
-    private final StandaloneService standaloneService;
+    private final AfterOAuthService afterOAuthService;
 
     @Operation(
             summary = "일반 회원 가입",
@@ -35,20 +33,13 @@ public class StandaloneController {
     public ResponseEntity<Void> generalRegister(
             @RequestBody GeneralUserRequest generalUserRequest
             ) {
-        standaloneService.generalRegister(generalUserRequest);
+        afterOAuthService.generalRegister(generalUserRequest);
         return ResponseEntity.ok().build();
     }
 
     @Operation(
             summary = "공인중개사 회원 가입",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "공인중개사 요청 데이터",
-                    required = true,
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = AgentUserRequest.class)
-                    )
-            )
+            description = "공인 중개사 회원 가입"
     )
     @PostMapping(
             value = "/agent",
@@ -72,7 +63,7 @@ public class StandaloneController {
             )
             @RequestBody AgentUserRequest agentUserRequest
             ) {
-        standaloneService.agentRegisters(agentUserRequest, agentCertificationDocuments, agentImage);
+        afterOAuthService.agentRegisters(agentUserRequest, agentCertificationDocuments, agentImage);
         return ResponseEntity.ok().build();
     }
 }
