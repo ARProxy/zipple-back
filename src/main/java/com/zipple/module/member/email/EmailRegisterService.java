@@ -72,7 +72,7 @@ public class EmailRegisterService {
     }
 
     @Transactional
-    public void emailRegisterAgent(EmailAgentRequest emailAgentRequest, List<MultipartFile> agentCertificationDocuments) {
+    public void emailRegisterAgent(EmailAgentRequest emailAgentRequest, List<MultipartFile> agentCertificationDocuments, MultipartFile agentImage) {
         String email = emailAgentRequest.getEmail();
         if(userRepository.findByEmail(email).isPresent()) {
             throw new IllegalArgumentException("이미 존재하는 회원입니다.");
@@ -92,7 +92,7 @@ public class EmailRegisterService {
         userRepository.save(user);
 
         AgentType agentType = AgentType.fromValue(emailAgentRequest.getAgentType());
-        AgentSpecialty agentSpecialty = AgentSpecialty.valueOf(emailAgentRequest.getAgentSpecialty());
+        AgentSpecialty agentSpecialty = AgentSpecialty.getByDescription(emailAgentRequest.getAgentSpecialty());
         AgentUser agentUser = AgentUser.builder()
                 .user(user)
                 .agentType(agentType)
@@ -107,7 +107,7 @@ public class EmailRegisterService {
                 .agentOfficeRegistrationCertificate(documentsPath(agentCertificationDocuments, 0, user.getId()))
                 .businessRegistrationCertification(documentsPath(agentCertificationDocuments, 1, user.getId()))
                 .agentLicense(documentsPath(agentCertificationDocuments, 2, user.getId()))
-//                .agentImage(imagePath(agentImage, user.getId()))
+                .agentImage(imagePath(agentImage, user.getId()))
                 .build();
         agentUserRepository.save(agentUser);
         log.info("공인중개사 회원가입 성공");

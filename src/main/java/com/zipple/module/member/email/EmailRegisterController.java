@@ -4,6 +4,8 @@ import com.zipple.module.member.email.model.EmailAgentRequest;
 import com.zipple.module.member.email.model.EmailGeneralRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -56,31 +58,34 @@ public class EmailRegisterController {
                     description = "중개 사무소 등록증"
             )
             @RequestPart(value = "realEstateAgencyCertificate") MultipartFile realEstateAgencyCertificate,
-//            @Parameter(
-//                    name = "businessCertificate",
-//                    description = "사업자 등록증"
-//            )
-//            @RequestPart(value = "businessCertificate",required = false) MultipartFile businessCertificate,
-//            @Parameter(
-//                    name = "realEstateAgentLicense",
-//                    description = "공인중개사 자격증"
-//            )
-//            @RequestPart(value = "realEstateAgentLicense", required = false) MultipartFile realEstateAgentLicense,
-//            @Parameter(
-//                    name = "agentImage",
-//                    description = "공인 중개사 본인 인증 사진"
-//            )
-//            @RequestPart(value = "agentImage", required = false) MultipartFile agentImage,
-//            @Parameter(
-//                    name = "emailAgentRequest",
-//                    description = "이메일 회원 공인중개사 가입 요청 데이터"
-//            )
-            @RequestBody EmailAgentRequest emailAgentRequest
+            @Parameter(
+                    name = "businessCertificate",
+                    description = "사업자 등록증"
+            )
+            @RequestPart(value = "businessCertificate") MultipartFile businessCertificate,
+            @Parameter(
+                    name = "realEstateAgentLicense",
+                    description = "공인중개사 자격증"
+            )
+            @RequestPart(value = "realEstateAgentLicense") MultipartFile realEstateAgentLicense,
+            @Parameter(
+                    name = "agentImage",
+                    description = "공인 중개사 본인 인증 사진"
+            )
+            @RequestPart(value = "agentImage") MultipartFile agentImage,
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "이메일 회원가입 요청 데이터(JSON)",
+                    required = true,
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = EmailAgentRequest.class)
+                    )
+            )
+            @RequestPart(value = "emailAgentRequest") EmailAgentRequest emailAgentRequest
             ) {
-        List<MultipartFile> agentCertificationDocuments = List.of(realEstateAgencyCertificate);
-        emailRegisterService.emailRegisterAgent(emailAgentRequest, agentCertificationDocuments);
-//        List<MultipartFile> agentCertificationDocuments = List.of(realEstateAgencyCertificate, businessCertificate, realEstateAgentLicense);
-//        emailRegisterService.emailRegisterAgent(emailAgentRequest, agentCertificationDocuments, agentImage);
+        System.out.println(emailAgentRequest.getEmail());
+        List<MultipartFile> agentCertificationDocuments = List.of(realEstateAgencyCertificate, businessCertificate, realEstateAgentLicense);
+        emailRegisterService.emailRegisterAgent(emailAgentRequest, agentCertificationDocuments, agentImage);
         return ResponseEntity.ok().build();
     }
 }

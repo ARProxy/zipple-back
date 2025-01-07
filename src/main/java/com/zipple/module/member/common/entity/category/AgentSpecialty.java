@@ -25,4 +25,18 @@ public enum AgentSpecialty {
     AgentSpecialty(String description) {
         this.description = description;
     }
+
+    public static AgentSpecialty getByDescription(String value) {
+        if(value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        String normalizedDescription = value.trim();
+        for(AgentSpecialty specialty : AgentSpecialty.values()) {
+            if(specialty.getDescription().equals(normalizedDescription)) {
+                return specialty;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 }
